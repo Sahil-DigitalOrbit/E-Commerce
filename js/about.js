@@ -13,7 +13,9 @@ if (productId) {
           JSON.parse(localStorage.getItem("users_cart")) || [];
 
         let isInBag = localStorageCart.find((x) => x.id == productDetails.id);
-        let addCartButtonTextContent = isInBag ? "Remove From Cart" : "Add To Bag";
+        let addCartButtonTextContent = isInBag
+          ? "Remove From Cart"
+          : "Add To Bag";
         let sizeOptions = productDetails.sizes
           .map((element, index) => {
             return `
@@ -153,20 +155,22 @@ function addToCart(e) {
     'input[name="colors"]:checked'
   )?.value;
   const selectedQuantity = document.querySelector(`.item-count`)?.value;
-  if (!selectedSize || !selectedColor) {
-    alert("Please select a size and color.");
-    return;
-  }
+
   const productId = e.currentTarget.id;
   let findItem = cart.find((item) => item.id == productId);
   if (findItem) {
     //remove from cart
+
     cart = cart.filter((x) => x.id !== productId);
     e.currentTarget.textContent = "Add To Bag";
   } else {
     // Add the item to the cart
+    if (!selectedSize || !selectedColor) {
+      alert("Please select a size and color.");
+      return;
+    }
     cart.push({ id: productId, selectedSize, selectedColor, selectedQuantity });
-    e.currentTarget.textContent = "Item Added";
+    e.currentTarget.textContent = "Remove From Cart";
   }
 
   // Save cart back to localStorage

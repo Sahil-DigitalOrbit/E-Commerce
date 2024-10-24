@@ -110,7 +110,7 @@ function updateTotal() {
     `;
   } else {
     document.querySelector(".cart-items-total").innerHTML =
-      total > 0 ? "Rs." + total : 0;
+      total > 0 ? "Rs." + total.toFixed(2) : 0;
     document.querySelector(".cart-items-total-final").innerHTML =
       total > 0 ? "Rs." + (total + deliveryCharge).toFixed(2) : 0;
   }
